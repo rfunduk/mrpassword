@@ -1,0 +1,92 @@
+.bootstrap-tagsinput {
+  min-height: 40px;
+  margin-bottom: 4px;
+  margin-top: 4px;
+  width: 100%;
+  cursor: text;
+  font-size: 18px;
+  line-height: 30px;
+  border-color: #DDD;
+  @include box-shadow( none !important );
+
+  input {
+    font-size: 16px;
+    margin-left: 2px;
+    // display: none;
+  }
+  &.editing {
+    input { display: inline; }
+  }
+
+  .tag [data-role="remove"] {
+    &:after {
+      content: "\00D7";
+    }
+    &:hover, &:active {
+      @include box-shadow( none !important );
+    }
+  }
+}
+
+#passwords .list-group-item {
+  position: relative;
+  .tags {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    div {
+      float: left;
+      width: 30px;
+      height: 5px;
+      margin-right: 3px;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+    }
+  }
+}
+
+#tags-filterer {
+  ul {
+    @include clearfix;
+    list-style: none outside;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 22px;
+    text-align: center;
+    li {
+      display: inline-block;
+      margin: 0 4px;
+      .label {
+        font-size: 16px;
+        background-color: #F6F6F6;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+ul.tags-editor {
+  list-style: none outside;
+  padding: 0;
+  margin: 0;
+  li {
+    line-height: 30px;
+
+    .glyphicon {
+      color: #DDD;
+    }
+    &.active .glyphicon {
+      color: #333;
+    }
+    .label {
+      background-color: #F6F6F6;
+      cursor: pointer;
+      font-size: 14px;
+      &.show-active { display: none; }
+    }
+    &.active {
+      .label.show-active { display: inline; }
+      .label.hide-active { display: none; }
+    }
+  }
+}

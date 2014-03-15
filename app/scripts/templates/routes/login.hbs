@@ -1,0 +1,45 @@
+<div class='panel panel-default'>
+  <div class='panel-body'>
+    <h2>Welcome to Mr. Password!</h2>
+
+    <p>
+      Mr. Password is a password manager built on the
+      <a href='https://www.dropbox.com/developers/datastore' target='_blank'>Dropbox Datastore API</a>.
+      It uses a in-memory master password you supply
+      to encrypt and decrypt passwords (or any short text, really)
+      using the
+      <a href='http://crypto.stanford.edu/sjcl/' target='_blank'>Standford JavaScript Crypto Library</a>.
+    </p>
+
+    <div class='alert alert-warning'>
+      <h4>Wait a sec... is that a good idea?</h4>
+      <p>
+        Well, there are a lot of opinions on this subject. If you are
+        worried about it at all, then you should probably <em>not</em> use it.
+        Ever used
+        <a href='http://learn.agilebits.com/1Password4/iOS/Sync/Dropbox/dropbox-getting-started.html' target='_blank'>1PasswordAnywhere</a>?
+        It's a lot like that.
+      </p>
+    </div>
+
+    <h3>Ready to get started?</h3>
+
+    <p>
+      If you got this far, you can login with your Dropbox account
+      to get going right now. This is a single page app with no backend
+      other than Dropbox, and it is
+      <a href='https://bitbucket.org/rfunduk/mrpassword' target='_blank'>open source</a> (you can run your own!),
+      so please be assured that nothing will be done with your data except
+      stored encrypted to Dropbox.
+    </p>
+
+    <a class='btn btn-lg btn-primary action-login' href='javascript:void(0);'>
+      Login with Dropbox
+      <span class='glyphicon glyphicon-log-in'></span>
+    </a>
+
+    {{> credits}}
+  </div>
+</div>
+
+{{> footer}}

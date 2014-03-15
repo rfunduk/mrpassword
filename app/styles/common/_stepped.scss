@@ -1,0 +1,28 @@
+.stepped {
+  padding: 0;
+  margin: 0;
+
+  .inner {
+    @include clearfix;
+
+    .step {
+      float: left;
+      padding: 6px;
+      display: none;
+      width: 100%;
+
+      .form-group {
+        margin-bottom: 0;
+        .glyphicon {
+          top: 0;
+        }
+      }
+    }
+  }
+
+  @for $i from 0 through 10 {
+    &.on-step-index-#{$i} {
+      .step#{$i+1} { display: block; }
+    }
+  }
+}

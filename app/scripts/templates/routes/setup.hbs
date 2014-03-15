@@ -1,0 +1,105 @@
+{{> header}}
+
+<section>
+  <div class='row'>
+    <div class='col-xs-12'>
+      <div class='list-group'>
+
+        <!-- master password -->
+        <div class='list-group-item {{#if hasMaster}}change{{else}}set{{/if}}-master-password'>
+          <div class='row'>
+            <div class='col-xs-12 col-sm-6'>
+              <h4 class='list-group-item-heading'>
+                Master Password
+              </h4>
+            </div>
+            <div class='col-xs-12 col-sm-6'>
+              <div class='list-group-item-text master-password-interface'></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- tags -->
+        <div class='list-group-item'>
+          <div class='row'>
+            <div class='col-xs-12 col-sm-6'>
+              <h4 class='list-group-item-heading'>
+                Tags
+                <small>(coloured by order)</small>
+              </h4>
+            </div>
+            <div class='col-xs-12 col-sm-6'>
+              <div class='list-group-item-text tags-interface'></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- remember master -->
+        <div class='list-group-item'>
+          <div class='row'>
+            <div class='col-xs-12 col-sm-6'>
+              <h4 class='list-group-item-heading'>
+                Sticky Master Password?
+              </h4>
+            </div>
+            <div class='col-xs-12 col-sm-6'>
+              <div class='list-group-item-text remember-master-container'>
+                <div class='toggle'>
+                  <input type='checkbox' class='check action-toggle-remember-master remember-master' {{#if rememberMaster}}checked{{/if}} />
+                  <b class='switch'></b><b class='track'></b>
+                </div>
+                <small>
+                  Require master password only once per visit.
+                  <br/>
+                  Master password will be stored in memory only.
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- backup/data dump -->
+        <div class='list-group-item'>
+          <div class='row'>
+            <div class='col-xs-12 col-sm-6'>
+              <h4 class='list-group-item-heading'>
+                Backup Data
+                <small>(json)</small>
+              </h4>
+            </div>
+            <div class='col-xs-12 col-sm-6'>
+              <div class='list-group-item-text backup-data-interface'></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- purge all data -->
+        <div class='list-group-item'>
+          <div class='row'>
+            <div class='col-xs-12 col-sm-6'>
+              <h4 class='list-group-item-heading'>
+                Purge All Data
+                <small>(<em>seriously</em> irreversible!)</small>
+              </h4>
+            </div>
+            <div class='col-xs-12 col-sm-6'>
+              <div class='list-group-item-text'>
+                <div class='action-buttons bare-actions'>
+                  <a class='btn btn-danger action-purge-all-data'>
+                    <span class='glyphicon glyphicon-exclamation-sign'></span>
+                    <span class='message'>Goodbye, Mr. Password!</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {{> credits}}
+</section>
+
+{{> footer}}

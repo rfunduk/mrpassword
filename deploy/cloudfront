@@ -1,0 +1,94 @@
+#!/usr/bin/env ruby
+
+require 'aws-sdk'
+
+require 'pathname'
+
+require 'optparse'
+require 'ostruct'
+
+options = OpenStruct.new( { s3config_path: nil, bucket: nil } )
+
+OptionParser.new do |opts|
+  opts.on('-c', '--config PATH', String, :REQUIRED, 'Path to your .s3cfg') do |path|
+    options.s3config_path = path
+  end
+  opts.on('-b', '--bucket NAME', String, :REQUIRED, 'The bucket to upload to') do |bucket|
+    options.bucket = bucket
+  end
+end.parse!
+
+if options.bucket.nil?
+  puts "Bucket (-b NAME) is required."
+  exit 1
+end
+
+options.s3config_path ||= File.expand_path('~/.s3cfg')
+if !File.exists?(options.s3config_path)
+  puts "Specify the path to your .s3cfg file (https://github.com/s3tools/s3cmd)"
+  exit 1
+end
+
+s3config = File.readlines(options.s3config_path)
+
+CREDENTIALS = { access: '', secret: '' }
+s3config.each do |line|
+  case line
+  when /access_key\s*=\s*([^\n]*)/
+    CREDENTIALS[:access] = $1
+  when /secret_key\s*=\s*([^\n]*)/
+    CREDENTIALS[:secret] = $1
+  end
+end
+
+if CREDENTIALS[:access].nil? || CREDENTIALS[:secret].nil?
+  puts "Unable to find access/secret keys in .s3cfg"
+  exit 1
+end
+
+cf = AWS::CloudFront.new( access_key_id: CREDENTIALS[:access],
+                          secret_access_key: CREDENTIALS[:secret] )
+
+distribution_id = cf.client.list_distributions[:items].find do |item|
+  item[:origins][:items].find { |o| o[:id] == options.bucket }
+end.fetch( :id, nil )
+
+if distribution_id.nil?
+  puts "Unable to find a CloudFront distribution for that bucket."
+  puts "(this script doesn't support creating a distribution)"
+  exit 1
+else
+  puts "Found distribution: #{distribution_id}"
+end
+
+new_root = Pathname(Dir.glob('dist/*.index.html').first).basename.to_s
+
+distribution_config = cf.client.get_distribution_config( id: distribution_id ).data
+distribution_config[:default_root_object] = new_root
+
+# wtf aws-sdk?
+# fix/ensure that:
+# - :origin_access_identity is a string, and not nil
+# - :comment is a string, and not nil
+# - :logging->:bucket is a string, and not nil
+# - :logging->:prefix is a string, and not nil
+# - :request_id is missing
+# - :etag is removed but passed laster as :if_match
+distribution_config[:origins][:items].each do |item|
+  item[:s3_origin_config][:origin_access_identity] ||= ""
+end
+distribution_config[:comment] ||= ""
+distribution_config[:logging][:bucket] ||= ""
+distribution_config[:logging][:prefix] ||= ""
+distribution_config.delete :request_id
+etag = distribution_config.delete :etag
+
+puts "Syncing dist/* to #{options.bucket}..."
+system "s3cmd sync --no-progress --force --recursive --acl-public dist/ s3://#{options.bucket}"
+
+puts "Setting root object to #{new_root}..."
+cf.client.update_distribution( id: distribution_id,
+                               if_match: etag,
+                               distribution_config: distribution_config )
+
+puts "DONE"

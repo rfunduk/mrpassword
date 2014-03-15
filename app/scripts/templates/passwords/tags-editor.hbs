@@ -1,0 +1,9 @@
+<ul class='tags-editor' id='{{cid}}'>
+  {{#each tags}}
+    <li data-id='{{id}}' class='{{#if active}}active{{/if}}'>
+      <span class='glyphicon glyphicon-ok'></span>
+      <span class='label label-default show-active' style='background-color: {{color}}; color: white;'>{{name}}</span>
+      <span class='label label-default hide-active' style='color: {{color}};'>{{name}}</span>
+    </li>
+  {{/each}}
+</ul>

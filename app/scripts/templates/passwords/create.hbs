@@ -1,0 +1,55 @@
+<div class='create-form'>
+  <div class='list-group-item'>
+    <div class='row'>
+      <div class='col-xs-12 col-sm-4'>
+        <h4 class='list-group-item-heading' contenteditable>
+          {{#if name}}
+            {{name}}
+          {{else}}
+            Password Name
+          {{/if}}
+        </h4>
+      </div>
+      <div class='col-xs-12 col-sm-8'>
+        <div class='list-group-item-text'>
+          <div class='stepped on-step-index-0'>
+            <div class='inner'>
+
+              <div class='step step1'>
+                <div class='action-buttons'>
+                  <button class='delete btn btn-danger action-cancel'>
+                    <span class='glyphicon glyphicon-remove'></span>
+                  </button>
+                  <button class='btn btn-default action-edit-tags' data-container='body' data-toggle='popover' data-width='300' data-placement='bottom'>
+                    <span class='glyphicon glyphicon-tags'></span>
+                  </button>
+                  <button class='next-step btn btn-default'>Set a Password...</button>
+                </div>
+              </div>
+
+              <div class='step step2'>
+                <div class='form-group has-feedback'>
+                  <input type='password' class='form-control master-password password-field' placeholder='Your Master Password' />
+                  <span class='glyphicon form-control-feedback'></span>
+                </div>
+              </div>
+
+              <div class='step step3'>
+                <div class='input-group'>
+                  <input type='text' class='form-control new-password password-field' />
+                  <span class='input-group-btn'>
+                    <button class='btn btn-default action-generate' data-toggle='tooltip' data-placement='bottom' title='Generate a password'>
+                      <span class='glyphicon glyphicon-repeat'></span>
+                    </button>
+                    <button class='btn btn-default action-save' type='button'>Save</button>
+                  </span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

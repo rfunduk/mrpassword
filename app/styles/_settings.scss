@@ -1,0 +1,79 @@
+.setup {
+
+  .progress {
+    margin-bottom: 0;
+    margin-top: 9px;
+    .progress-bar {
+      @include transition(width .05s ease);
+    }
+  }
+
+  .master-password-set, .preparing-download {
+    margin-top: 5px;
+    margin-bottom: 0px;
+    text-align: right;
+    @media (max-width: $screen-xs-max) {
+      text-align: center;
+    }
+    color: $text-muted;
+  }
+
+  .remember-master-container {
+    text-align: right;
+    .toggle {
+      float: right;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      .check ~ .switch:before { content: 'forget'; }
+      .check:checked ~ .switch:before { content: 'remember'; }
+      .check ~ .track:before { content: 'remember?'; }
+      .check:checked ~ .track:before { content: 'forget?'; }
+    }
+    small {
+      clear: both;
+      display: block;
+      margin-bottom: 4px;
+      color: $text-muted;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      text-align: center;
+      .toggle {
+        float: none;
+        margin: 10px auto;
+      }
+    }
+  }
+
+  .backup-data-interface {
+    text-align: right;
+    .action-buttons {
+      float: right;
+    }
+    .toggle {
+      float: right;
+      margin-top: 5px;
+      margin-right: 20px;
+      .check ~ .switch:before { content: 'encrypted'; }
+      .check:checked ~ .switch:before { content: 'decrypted'; }
+      .check ~ .track:before { content: 'decrypted?'; }
+      .check:checked ~ .track:before { content: 'encrypted?'; }
+    }
+  }
+
+  .action-purge-all-data {
+    &.confirm-purge {
+      background: $brand-danger;
+      border-color: darken($brand-danger, 10%);
+      color: white;
+    }
+  }
+
+  .credits {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 30px;
+    a { font-weight: bold; }
+  }
+
+}

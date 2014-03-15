@@ -1,0 +1,29 @@
+<header>
+  <h1><tt>Mr. P@s5w0rd</tt></h1>
+
+  {{#ifLoggedIn}}
+    <div class='nav nav-pills'>
+      {{#ifHasMasterPassword}}
+        {{#ifOnRoute 'settings'}}
+          <a class='btn btn-default action-password-list' href='#/'>
+            <span class='glyphicon glyphicon-th-list'></span>
+            Password List
+          </a>
+        {{/ifOnRoute}}
+      {{/ifHasMasterPassword}}
+
+      {{#ifOnRoute 'main'}}
+        <button class='btn btn-default action-create-password'>
+          <span class='glyphicon glyphicon-plus-sign'></span>
+          Add...
+        </button>
+        <a class='btn btn-default' href='#/settings'>
+          <span class='glyphicon glyphicon-cog'></span>
+          Settings
+        </a>
+      {{/ifOnRoute}}
+
+      <a class='btn btn-default' href='#/logout'>Logout</a>
+    </div>
+  {{/ifLoggedIn}}
+</header>

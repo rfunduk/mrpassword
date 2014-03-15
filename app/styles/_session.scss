@@ -1,0 +1,44 @@
+.login, .logged-out {
+
+  .panel h2 {
+    text-align: center;
+    margin-top: 6px;
+    margin-bottom: 18px;
+  }
+
+  a {
+    font-weight: bold;
+  }
+
+  .alert {
+    margin-top: 18px;
+  }
+
+  .credits {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+  }
+
+  .action-login {
+    display: block;
+    margin: 40px 20%;
+    height: 80px;
+    width: 400px;
+    background-image: url(../images/dropboxLogin.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    color: transparent;
+    text-indent: -5000px;
+    @media (max-width: $screen-sm-min) {
+      width: 230px;
+      height: 100px;
+      margin: 40px auto;
+      background-image: url(../images/dropboxLoginSmall.png);
+    }
+    .glyphicon {
+      margin-left: 5px;
+    }
+  }
+
+}

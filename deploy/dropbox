@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+echo "Deploying ./dist to ~/Dropbox/Public/MrPassword $1"
+rsync -r --quiet $1 ./dist/ ~/Dropbox/Public/MrPassword
+echo "DONE"

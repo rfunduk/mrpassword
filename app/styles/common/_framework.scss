@@ -1,0 +1,45 @@
+$icon-font-path: '../fonts/';
+
+$border-color: darken(white, 5%);
+
+// primary is just grayish
+$brand-primary: #333;
+
+// danger buttons are white with red text
+$btn-danger-bg: white;
+$btn-danger-color: #d9534f;
+
+// all borders are light gray
+$btn-default-border: $border-color;
+$btn-danger-border: $border-color;
+$btn-primary-border: $border-color;
+$panel-default-border: $border-color;
+
+// less prominent list group + hovers
+$list-group-hover-bg: #FEFEFE;
+$list-group-border: #EEE;
+
+// lose the blue focus
+$input-border: $border-color;
+$input-border-focus: #CCC;
+
+// lighten disabled input bg
+$input-bg-disabled: #FEFEFE;
+
+@import 'bootstrap-sass/vendor/assets/stylesheets/bootstrap';
+
+.form-control {
+  &, &:focus { @include box-shadow( none !important ); }
+  &[readonly] { cursor: text; }
+}
+
+.panel {
+  @include box-shadow( none !important );
+  .panel-body {
+    padding: 25px;
+  }
+}
+
+.glyphicon {
+  top: 2px;
+}

@@ -1,0 +1,40 @@
+<div class='panel panel-default'>
+  <div class='panel-body'>
+    <h2>
+      {{#ifApp 'purged'}}
+        Mr. Password Forgot Everything
+      {{else}}
+        Logged out of Mr. Password
+      {{/ifApp}}
+    </h2>
+
+    <p>
+      {{#ifApp 'purged'}}
+        All of your data stored via the
+        <a href='https://www.dropbox.com/developers/datastore' target='_blank'>Dropbox Datastore API</a>
+        has been cleared, you have been logged out of Dropbox,
+      {{else}}
+        You have been logged out of Dropbox,
+      {{/ifApp}}
+      and various in-memory data has been cleaned up. It
+      would probably be best to close this tab, just to be sure :)
+    </p>
+
+    <p>
+      {{#ifApp 'purged'}}
+        Maybe you'd like to start over...?
+      {{else}}
+        Login again?
+      {{/ifApp}}
+    </p>
+
+    <a class='btn btn-lg btn-primary action-login' href='javascript:void(0);'>
+      Login with Dropbox
+      <span class='glyphicon glyphicon-log-in'></span>
+    </a>
+
+    {{> credits}}
+  </div>
+</div>
+
+{{> footer}}

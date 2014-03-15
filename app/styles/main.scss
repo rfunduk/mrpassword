@@ -1,0 +1,65 @@
+@import 'common/_framework';
+@import 'common/_stepped';
+@import 'common/_list-group';
+@import 'common/_toggle-switch';
+
+@import 'common/_header';
+@import 'common/_footer';
+@import 'common/_tags';
+
+@import '_session';
+@import '_passwords';
+@import '_settings';
+
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.container.loading {
+  height: 300px;
+  margin: 0 auto;
+  margin-top: 50px;
+  text-align: center;
+  padding-top: 140px;
+  background: white url(../images/loadingSpinner.gif) no-repeat top center;
+  &:before {
+    content: "Loading Mr. Password...";
+    text-align: center;
+    width: 100%;
+    color: $text-muted;
+  }
+}
+
+.credits {
+  text-align: center;
+  small {
+    display: block;
+  }
+  @media (max-width: $screen-sm-min) {
+    small { display: inline; }
+  }
+}
+
+.btn {
+  &, &:active, &:focus { outline: 0 !important; }
+}
+
+.password-field {
+  font-family: Menlo, Inconsolata, Consolas, Monaco, Bitstream Vera Sans, monospace;
+  font-size: 12px;
+  padding-top: 9px;
+  padding-bottom: 7px;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+
+  .header,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
