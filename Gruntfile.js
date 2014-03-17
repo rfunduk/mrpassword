@@ -248,13 +248,13 @@ module.exports = function (grunt) {
       },
       // renames index.html to SHA.index.html for cache busting
       // on Amazon CloudFront
-      // deploy: {
-      //   files: {
-      //     src: [
-      //       '<%= yeoman.dist %>/index.html'
-      //     ]
-      //   }
-      // }
+      deploy: {
+        files: {
+          src: [
+            '<%= yeoman.dist %>/index.html'
+          ]
+        }
+      }
     },
 
     // Reads HTML for usemin blocks to enable smart builds that automatically

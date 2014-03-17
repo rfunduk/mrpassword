@@ -49,9 +49,11 @@ end
 cf = AWS::CloudFront.new( access_key_id: CREDENTIALS[:access],
                           secret_access_key: CREDENTIALS[:secret] )
 
-distribution_id = cf.client.list_distributions[:items].find do |item|
+distribution = cf.client.list_distributions[:items].find do |item|
   item[:origins][:items].find { |o| o[:id] == options.bucket }
-end.fetch( :id, nil )
+end
+
+distribution_id = distribution.fetch( :id, nil )
 
 if distribution_id.nil?
   puts "Unable to find a CloudFront distribution for that bucket."
@@ -91,4 +93,4 @@ cf.client.update_distribution( id: distribution_id,
                                if_match: etag,
                                distribution_config: distribution_config )
 
-puts "DONE"
+puts "DONE -- available at https://#{distribution.fetch(:domain_name)}"
