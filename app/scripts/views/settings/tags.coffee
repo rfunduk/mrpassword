@@ -13,7 +13,6 @@ class App.Views.Setting.Tags extends Backbone.View
 
   tagsChanged: ->
     newTags = @_tagsInput.val()
-    console.log 'tags changed', newTags
     App.tags.update( newTags )
     @setTagColors()
 

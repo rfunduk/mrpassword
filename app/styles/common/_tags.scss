@@ -51,8 +51,10 @@
     list-style: none outside;
     margin: 0;
     padding: 0;
-    margin-bottom: 22px;
     text-align: center;
+    margin-bottom: 22px;
+    &:empty { margin-bottom: 0; }
+
     li {
       display: inline-block;
       margin: 0 4px;
