@@ -12,19 +12,27 @@ ever stored on Dropbox.
 
 ## Try It
 
+Here's one hosted on my Dropbox:
+
 [https://tinyurl.com/mrpassword](https://tinyurl.com/mrpassword)
 
-This is hosted on my Dropbox. Did your eyes just bulge? Don't be worried,
-the files are hosted on my Dropbox, but you login using your own Dropbox account and
-data will be stored there in your own personal datastore. The app also has a
-purge data function you can use if you decide to run away :)
+Here's one running on AWS CloudFront:
+
+[https://d3g5t5f7zdns67.cloudfront.net](https://d3g5t5f7zdns67.cloudfront.net)
+
+Hosted on my Dropbox...? Did your eyes just bulge? Don't be worried,
+the files are hosted on my Dropbox (or in an S3 bucket of mine for the CloudFront link),
+but you login using your own Dropbox account and data will be stored there in
+your own personal datastore. The app also has a purge data function you can use
+if you decide to run away :)
 
 
 ## Run your own
 
 Since this project is open-source, you can clone/fork it and look at the code
 for yourself and decide if this is a good idea or not. If you do so and decide
-it's a good idea, you can run your own version locally or wherever you want.
+it's a good idea, you can run your own version locally or wherever you want (well,
+almost, Dropbox requires SSL for OAuth apps except for `localhost`).
 
 ### Requirements
 
