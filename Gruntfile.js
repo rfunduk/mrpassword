@@ -341,11 +341,7 @@ module.exports = function (grunt) {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
 
-    grunt.task.run([
-      'dev',
-      'connect:dev',
-      'watch'
-    ]);
+    grunt.task.run(['dev', 'connect:dev', 'watch']);
   });
 
   grunt.registerTask('dev', [
@@ -369,7 +365,7 @@ module.exports = function (grunt) {
     'karma'
   ]);
 
-  grunt.registerTask('build', [
+  var buildTasks = [
     'clean:dist',
     'useminPrepare',
     'handlebars',
@@ -383,12 +379,13 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'rev:dist',
-    'usemin',
-    // 'rev:deploy'
-  ]);
+    'usemin'
+  ];
 
-  grunt.registerTask('default', [
-    'test',
-    'build'
-  ]);
+  if( grunt.option('versionIndex') ) {
+    buildTasks.push('rev:deploy');
+  }
+
+  grunt.registerTask('build', buildTasks);
+  grunt.registerTask('default', ['test', 'build']);
 };
