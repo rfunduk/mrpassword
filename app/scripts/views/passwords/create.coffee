@@ -27,7 +27,7 @@ class App.Views.Passwords.Create extends App.Views.Stepped
     @reset()
 
   clearForm: ->
-    @model = new App.Password
+    @model = new App.Password tags: App.filteredTags.pluck('name')
     # @render()
     @$('.master-password, .new-password').val( null )
     @checkMaster()

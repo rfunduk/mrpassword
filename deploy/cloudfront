@@ -34,10 +34,8 @@ s3config = File.readlines(options.s3config_path)
 CREDENTIALS = { access: '', secret: '' }
 s3config.each do |line|
   case line
-  when /access_key\s*=\s*([^\n]*)/
-    CREDENTIALS[:access] = $1
-  when /secret_key\s*=\s*([^\n]*)/
-    CREDENTIALS[:secret] = $1
+  when /access_key\s*=\s*([^\n]*)/ then CREDENTIALS[:access] = $1
+  when /secret_key\s*=\s*([^\n]*)/ then CREDENTIALS[:secret] = $1
   end
 end
 

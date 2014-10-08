@@ -6,7 +6,7 @@ class App.Views.Passwords.List extends Backbone.View
 
   initialize: ->
     @listenTo App.passwords, 'add', @renderItem
-    @listenTo App.filteredTags, 'add remove filter', @filter
+    @listenTo App.filteredTags, 'add remove reset filter', @filter
     @subviews = {}
 
   remove: ->
