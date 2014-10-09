@@ -193,37 +193,15 @@ module.exports = function (grunt) {
     },
 
     // Compiles Sass to CSS and generates necessary files if requested
-    sass: {
-      options: {
-        loadPath: [
-          '<%= yeoman.app %>/styles',
-          '<%= yeoman.app %>/bower_components/'
-        ],
-        precision: 10,
-        style: 'compact',
-        trace: true,
-        sourcemap: true
-      },
-      dist: {
-        expand: true,
-        cwd: '<%= yeoman.app %>/styles',
-        src: 'main.scss',
-        ext: '.css',
-        dest: '.tmp/styles'
-      }
-    },
-
-    // TODO use libsass/node-sass/grunt-sass once it's working
     // sass: {
     //   options: {
-    //     includePaths: [
+    //     loadPath: [
     //       '<%= yeoman.app %>/styles',
     //       '<%= yeoman.app %>/bower_components/'
     //     ],
     //     precision: 10,
-    //     outputStyle: 'compact',
-    //     trace: true,
-    //     sourceMap: 'map'
+    //     style: 'compact',
+    //     trace: true
     //   },
     //   dist: {
     //     expand: true,
@@ -233,6 +211,27 @@ module.exports = function (grunt) {
     //     dest: '.tmp/styles'
     //   }
     // },
+
+    // grunt-sass now that it's working?
+    sass: {
+      options: {
+        includePaths: [
+          '<%= yeoman.app %>/styles',
+          '<%= yeoman.app %>/bower_components/'
+        ],
+        precision: 10,
+        outputStyle: 'compact',
+        trace: true,
+        sourceMap: true
+      },
+      dist: {
+        expand: true,
+        cwd: '<%= yeoman.app %>/styles',
+        src: 'main.scss',
+        ext: '.css',
+        dest: '.tmp/styles'
+      }
+    },
 
     // Renames files for browser caching purposes
     rev: {
@@ -322,6 +321,10 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/bower_components/bootstrap-sass/vendor/assets/fonts/bootstrap',
         src: '*',
         dest: '.tmp/fonts/'
+      },
+      keepIndex: {
+        src: '<%= yeoman.dist %>/*.index.html',
+        dest: '<%= yeoman.dist %>/index.html'
       }
     },
 
@@ -379,12 +382,10 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'rev:dist',
-    'usemin'
+    'usemin',
+    'rev:deploy',
+    'copy:keepIndex'
   ];
-
-  if( grunt.option('versionIndex') ) {
-    buildTasks.push('rev:deploy');
-  }
 
   grunt.registerTask('build', buildTasks);
   grunt.registerTask('default', ['test', 'build']);

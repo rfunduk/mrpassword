@@ -39,6 +39,7 @@ self-sign if necessary).
 ### Requirements
 
 - Node.js 0.8+ and NPM
+- Grunt (`npm install -g grunt-cli`)
 - Bower 1.3+ (`npm install -g bower`)
 - A Dropbox Datastore [app](https://www.dropbox.com/developers/apps)
 - [s3cmd](https://github.com/s3tools/s3cmd) +
@@ -88,8 +89,5 @@ This dumps the final packaged up app into `./dist`. There are
 - `deploy/dropbox` copies the files to
   `~/Dropbox/Public/MrPassword` (which you can then get a public link to)
 - `deploy/cloudfront -b BUCKET` uploads the files with `s3cmd` to a bucket you specify
-  (and which you'll want a CloudFront distribution pointing at). If you do
-  this you will probably want to enable `--versionIndex` so that
-  `index.html` becomes `SHA.index.html`, as this will help with cache busting
-  CloudFront (the appropriate index file is set as the 'root object',
-  but expect to wait about 10 minutes for the new version to be served).
+  (and which you'll want a CloudFront distribution pointing at). Expect to wait about
+  10 minutes for the new version to be served.
