@@ -1,7 +1,9 @@
 {{#unlessEmpty tags}}
   <div class='tags'>
     {{#each tags}}
-      <div style='background-color: {{color}};'></div>
+      {{#if active}}
+        <div style='background-color: {{color}};'></div>
+      {{/if}}
     {{/each}}
   </div>
 {{/unlessEmpty}}

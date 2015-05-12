@@ -7,10 +7,9 @@ class App.Views.Settings extends Backbone.View
   considerPurgeAllData: ( e ) ->
     target = @$('.action-purge-all-data')
     if target.hasClass('confirm-purge')
-      manager = window.dropboxApi.client.getDatastoreManager()
-      manager.deleteDatastore 'default', ->
-        App.purged = true
-        App.router.navigate( 'logout', trigger: true )
+      window.dropboxApi.client.remove('vault.json')
+      App.purged = true
+      App.router.navigate( 'logout', trigger: true )
     else
       target.addClass('confirm-purge').find('.message').text("Are you REALLY sure?")
       setTimeout(

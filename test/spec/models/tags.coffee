@@ -38,6 +38,7 @@ describe 'App.Tags', ->
       expect( json[0].color ).to.eql(App.Tags.COLORS_BY_POSITION[0])
 
     it 'should indicate active tags', ->
-      json = tags.toJSON( [ 'tag1' ] )
+      shouldBeActive = tags.pluck('id')[0]
+      json = tags.toJSON( [ shouldBeActive ] )
       expect( json[0].active ).to.be.ok()
       expect( json[1].active ).to.not.be.ok()

@@ -11,7 +11,7 @@
 @import '_passwords';
 @import '_settings';
 
-body {
+.container {
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -45,11 +45,30 @@ body {
   &, &:active, &:focus { outline: 0 !important; }
 }
 
+.label {
+  line-height: 2em;
+}
+
 .password-field {
   font-family: Menlo, Inconsolata, Consolas, Monaco, Bitstream Vera Sans, monospace;
   font-size: 12px;
   padding-top: 9px;
   padding-bottom: 7px;
+}
+
+.glyphicon.spinning {
+  animation: spin 2s infinite linear;
+  -webkit-animation: spin2 2s infinite linear;
+}
+
+@keyframes spin {
+  from { transform: scale(1) rotate(0deg); }
+  to { transform: scale(1) rotate(360deg); }
+}
+
+@-webkit-keyframes spin2 {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
 }
 
 @media screen and (min-width: 768px) {

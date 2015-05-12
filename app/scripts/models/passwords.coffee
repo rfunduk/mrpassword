@@ -2,8 +2,6 @@ class App.Password extends Backbone.Model
   table: -> _.result( @collection, 'table' )
 
   parse: ( attrs ) ->
-    # convert Dropbox.Datastore.List to array
-    attrs.tags = attrs.tags.toArray() if attrs.tags
     attrs
 
   password: ( master ) ->

@@ -1,5 +1,8 @@
 <header>
-  <h1><tt>Mr. P@s5w0rd</tt></h1>
+  <h1>
+    <tt>Mr. P@s5w0rd</tt>
+    <span class='glyphicon glyphicon-refresh {{#if loading}}spinning{{/if}}'></span>
+  </h1>
 
   {{#ifLoggedIn}}
     <div class='nav nav-pills'>

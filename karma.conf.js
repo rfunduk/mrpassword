@@ -34,15 +34,15 @@ module.exports = function( config ) {
       // stubs out dropbox api
       'test/mock/**/*.coffee',
 
-      'app/scripts/framework/**/*.coffee',
       'app/scripts/configure.coffee',
       'app/scripts/helpers.coffee',
+      'app/scripts/framework/**/*.coffee',
 
       // karma doesn't know how to recompile templates
       '.tmp/scripts/templates.js',
 
-      'app/scripts/models/**/*.coffee',
       'app/scripts/services/**/*.coffee',
+      'app/scripts/models/**/*.coffee',
       'app/scripts/views/**/*.coffee',
       'app/scripts/boot.coffee',
 

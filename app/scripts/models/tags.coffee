@@ -36,6 +36,6 @@ class App.Tags extends Backbone.Collection
     colors = @constructor.COLORS_BY_POSITION
     @map ( tag, i ) ->
       json = tag.toJSON()
-      json.active = _.include( selectedTags, json.name ) if selectedTags
+      json.active = _.include( selectedTags, json.id ) if selectedTags
       json.color = colors[i]
       json

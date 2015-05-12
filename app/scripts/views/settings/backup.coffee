@@ -38,7 +38,7 @@ class App.Views.Setting.Backup extends App.Views.Stepped
       f = 'addClass'
       @_currentMaster = master
       setTimeout(
-        => @backupData()
+        => @nextStep()
         800
       )
     else

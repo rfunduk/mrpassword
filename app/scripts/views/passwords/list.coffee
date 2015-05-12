@@ -26,14 +26,14 @@ class App.Views.Passwords.List extends Backbone.View
       # we need to hide/show views depending on
       # the model having the chosen tags
       @$('.empty-placeholder').remove()
-      filteredNames = App.filteredTags.pluck('name')
+      filteredTags = App.filteredTags.pluck('id')
       oneShown = false
       _.each @subviews, ( view, modelCid ) ->
         password = App.passwords.get(modelCid)
         tags = password.get('tags')
 
-        hasAllFilteredTags = _.every filteredNames, ( tagName ) ->
-          _.include( tags, tagName )
+        hasAllFilteredTags = _.every filteredTags, ( tagId ) ->
+          _.include( tags, tagId )
 
         if hasAllFilteredTags
           view.$el.show()

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ $1 != "" ]; then
+if [ -n "$1" ]; then
   DROPBOX_NAME=" ($1)"
 fi
 echo "Deploying ./dist to ~/Dropbox$DROPBOX_NAME/Public/MrPassword"

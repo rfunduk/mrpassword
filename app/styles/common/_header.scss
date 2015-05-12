@@ -5,6 +5,24 @@
   padding: 0.2em 0;
 }
 
+.dropbox-fail {
+  display: none;
+  background: #F7F7F7;
+  border-bottom: 1px solid #afdff4;
+  margin: 0;
+  text-align: center;
+  padding: 6px 10px;
+  p {
+    margin: 0;
+    padding: 0;
+    display: inline;
+    font-size: 16px;
+  }
+  a {
+    color: #1772c4;
+  }
+}
+
 header {
   // border-bottom: 1px solid #e5e5e5;
   margin-bottom: 10px;
@@ -15,6 +33,13 @@ header {
     margin-top: 0;
     margin-bottom: 0;
     padding-bottom: 15px;
+    span.glyphicon {
+      display: none;
+      vertical-align: super;
+      font-size: 14px;
+      color: #888;
+      &.spinning { display: inline-block; }
+    }
   }
 
   .nav {

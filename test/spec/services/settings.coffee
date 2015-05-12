@@ -46,21 +46,21 @@ describe 'App.Services.Settings', ->
       passwords = null
 
       beforeEach ->
-        dropboxApi.client.getDatastoreManager().deleteDatastore 'default'
+        dropboxApi.client.remove('vault.json')
         App.Passwords.MAX_UPDATE_SPEED = 1
-        passwords = new App.Passwords
+        App.passwords = new App.Passwords
         _.each [ 'pass1', 'pass2', 'pass3', 'pass4' ], ( name ) ->
           p = new App.Password( name: name )
           p.setPassword( master, name )
-          passwords.add( p )
+          App.passwords.add( p )
           p.save()
-        expect( passwords ).to.have.length(4)
+        expect( App.passwords ).to.have.length(4)
 
       it 'change all passwords', ( cb ) ->
         newMaster = '654321'
-        passwords.changeMasterPassword master, newMaster, ( done, i ) ->
+        App.passwords.changeMasterPassword master, newMaster, ( done, i ) ->
           return unless done
-          passwords.each ( password ) ->
+          App.passwords.each ( password ) ->
             expect( password.password( master ) ).to.eql(null)
             expect( password.password( newMaster ) ).to.eql( password.get('name') )
           cb()

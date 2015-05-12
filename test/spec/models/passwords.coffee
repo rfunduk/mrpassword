@@ -3,7 +3,7 @@ describe 'App.Passwords', ->
   passwords = null
 
   beforeEach ->
-    dropboxApi.client.getDatastoreManager().deleteDatastore 'default'
+    dropboxApi.client.remove('vault.json')
     passwords = new App.Passwords
 
   it 'should get passwords', ->

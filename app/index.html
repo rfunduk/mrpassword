@@ -6,7 +6,7 @@
     <title>Mr. Password</title>
 
     <meta name='description' content='' />
-    <meta name='viewport' content='width=device-width' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
 
     <link rel='apple-touch-icon' sizes='152x152' href='images/ios/icon-152.png' />
     <link rel='apple-touch-icon' sizes='144x144' href='images/ios/icon-144.png' />
@@ -30,10 +30,22 @@
     <![endif]-->
 
     <!-- main app container -->
+    <div class='dropbox-fail'>
+      <p>
+        Dropbox is
+        <a href='https://blogs.dropbox.com/developers/2015/04/deprecating-the-sync-and-datastore-apis/' target='_blank'>
+          deprecating datastores
+        </a>. If all your data is gone (!), then
+        <button type='button' class='btn btn-primary btn-xs migrate' style='vertical-align: top;'>migrate &raquo;</button>
+      </p>
+      </p>
+    </div>
     <div class='container loading'></div>
 
     <!-- Dropbox Datastore API Library -->
-    <script defer src='https://www.dropbox.com/static/api/dropbox-datastores-1.0-latest.js'></script>
+    <!--<script defer src='//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.10.2/dropbox.min.js'></script>-->
+    <!-- temp datastore-supporting fork of new dropbox js sdk -->
+    <script defer src='dropbox.js'></script>
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script defer src='bower_components/jquery/dist/jquery.js'></script>
@@ -53,6 +65,8 @@
     <script defer src='scripts/helpers.js'></script>
     <script defer src='scripts/templates.js'></script>
 
+    <script defer src='scripts/services/uuid.js'></script>
+    <script defer src='scripts/services/migrator.js'></script>
     <script defer src='scripts/services/encryptor.js'></script>
     <script defer src='scripts/services/settings.js'></script>
     <script defer src='scripts/services/password-generator.js'></script>

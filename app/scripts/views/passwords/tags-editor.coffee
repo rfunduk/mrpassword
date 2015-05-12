@@ -18,13 +18,15 @@ class App.Views.Passwords.TagsEditor extends Backbone.View
     clicked.toggleClass('active')
 
     tagIds = $("#{@popupSelector()} li.active").map ( _, el ) -> $(el).data('id')
-    tags = App.tags.filter ( tag ) -> _.include( tagIds, tag.id )
-    tagNames = _.invoke( tags, 'get', 'name' )
 
-    @model.set tags: tagNames
+    @model.set tags: tagIds.toArray()
     @model.save() unless @model.isNew()
 
   content: ->
-    selectedTags = @model.get('tags') || []
+    tagIds = @model.get('tags') || []
+    selectedTags = _.filter(
+      App.tags.pluck('id')
+      ( id ) -> _.include( tagIds, id )
+    )
     tags = App.tags.toJSON( selectedTags )
     html = App.Templates.passwords.tags_editor( cid: @model.cid, tags: tags )

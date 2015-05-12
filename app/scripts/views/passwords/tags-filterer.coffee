@@ -21,6 +21,6 @@ class App.Views.Passwords.TagsFilterer extends Backbone.View
     @render()
 
   render: ->
-    tags = App.tags.toJSON( App.filteredTags.pluck('name') )
+    tags = App.tags.toJSON( App.filteredTags.pluck('id') )
     @$el.html App.Templates.passwords.tags_filter( tags: tags )
     @

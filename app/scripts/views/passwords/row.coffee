@@ -21,7 +21,6 @@ class App.Views.Passwords.Row extends App.Views.Stepped
   initialize: ->
     @generator = new App.Services.PasswordGenerator
 
-    @updateName = _.debounce( @rawUpdateName, 500 )
     @checkMaster = _.debounce( @rawCheckMaster, 150 )
 
     super()
@@ -63,8 +62,7 @@ class App.Views.Passwords.Row extends App.Views.Stepped
       )
 
   # update the name of the password
-  # (debounced)
-  rawUpdateName: ->
+  updateName: ->
     @model.save name: $.trim(@$('h4').text())
 
   # encrypt and set new data
@@ -194,7 +192,6 @@ class App.Views.Passwords.Row extends App.Views.Stepped
   render: ->
     json = @model.toJSON()
     # lookup tags so we can set colors, etc
-    json.tags = _.filter App.tags.toJSON(), ( tag ) ->
-      _.include( json.tags, tag.name )
+    json.tags = App.tags.toJSON( @model.get('tags') )
     @$el.html App.Templates.passwords[@mode]( json )
     @
