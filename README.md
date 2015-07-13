@@ -16,12 +16,8 @@ Here's one hosted on my Dropbox:
 
 [https://tinyurl.com/mrpassword](https://tinyurl.com/mrpassword)
 
-Here's one running on AWS CloudFront:
-
-[https://d3g5t5f7zdns67.cloudfront.net](https://d3g5t5f7zdns67.cloudfront.net)
-
 Hosted on my Dropbox...? With minified assets? Did your eyes just bulge?
-Well, the files are hosted on my Dropbox/CloudFront, but you login using Dropbox
+Well, the files are hosted on my Dropbox, but you login using Dropbox
 OAuth and your data is stored on YOUR Dropbox. Also the app also has a
 purge data function you can use if you decide to run away :)
 
@@ -45,10 +41,6 @@ _Running your own and it's broken?_ ->
 - Grunt (`npm install -g grunt-cli`)
 - Bower 1.3+ (`npm install -g bower`)
 - A Dropbox 'App Folder' [app](https://www.dropbox.com/developers/apps)
-- [s3cmd](https://github.com/s3tools/s3cmd) +
-  Ruby +
-  [aws-sdk](https://github.com/aws/aws-sdk-ruby)
-  if deploying to CloudFront
 
 
 ### Setup
@@ -91,9 +83,6 @@ This dumps the final packaged up app into `./dist`. There are
 
 - `deploy/dropbox` copies the files to
   `~/Dropbox/Public/MrPassword` (which you can then get a public link to)
-- `deploy/cloudfront -b BUCKET` uploads the files with `s3cmd` to a bucket you specify
-  (and which you'll want a CloudFront distribution pointing at). Expect to wait about
-  10 minutes for the new version to be served.
 
 
 ## Migration from Dropbox Datastore API
