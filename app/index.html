@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html manifest='manifest.appcache'>
   <head>
     <meta charset='utf-8' />
     <meta http-equiv='X-UA-Compatible' content='IE=edge' />
@@ -30,22 +30,10 @@
     <![endif]-->
 
     <!-- main app container -->
-    <div class='dropbox-fail'>
-      <p>
-        Dropbox is
-        <a href='https://blogs.dropbox.com/developers/2015/04/deprecating-the-sync-and-datastore-apis/' target='_blank'>
-          deprecating datastores
-        </a>. If all your data is gone (!), then
-        <button type='button' class='btn btn-primary btn-xs migrate' style='vertical-align: top;'>migrate &raquo;</button>
-      </p>
-      </p>
-    </div>
     <div class='container loading'></div>
 
     <!-- Dropbox Datastore API Library -->
-    <!--<script defer src='//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.10.2/dropbox.min.js'></script>-->
-    <!-- temp datastore-supporting fork of new dropbox js sdk -->
-    <script defer src='dropbox.js'></script>
+    <script defer src='//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.10.2/dropbox.min.js'></script>
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script defer src='bower_components/jquery/dist/jquery.js'></script>

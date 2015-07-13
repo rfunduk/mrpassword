@@ -79,19 +79,4 @@ $(document).ready ->
     Backbone.history.start()
     $('.container').removeClass('loading')
 
-    # DATASTORE MIGRATION FEATURE
-    if window.dropboxApi.client.isAuthenticated() && !window.localStorage.getItem( 'noMigrationPrompt' )
-      $('.dropbox-fail').show().on 'click', 'button.migrate', ( e ) ->
-        e.preventDefault()
-        $('.dropbox-fail').hide()
-        $('.container').empty().addClass('loading')
-        migrator = new App.Services.Migrator
-        migrator.run ( error, data ) ->
-          $('.container').removeClass('loading')
-          if error then alert( "Uh oh, that didn't work :( -- send me an email maybe?" )
-          else
-            App.passwords.fetch()
-            App.tags.fetch()
-            App.router.navigate( '/', trigger: true, replace: true )
-
     App.filteredTags.trigger('filter')

@@ -3,7 +3,7 @@ describe 'App.Passwords', ->
   passwords = null
 
   beforeEach ->
-    dropboxApi.client.remove('vault.json')
+    dropboxApi.client.remove('@@vaultFileName.json')
     passwords = new App.Passwords
 
   it 'should get passwords', ->

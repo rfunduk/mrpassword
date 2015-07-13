@@ -7,7 +7,7 @@ class App.Views.Settings extends Backbone.View
   considerPurgeAllData: ( e ) ->
     target = @$('.action-purge-all-data')
     if target.hasClass('confirm-purge')
-      window.dropboxApi.client.remove('vault.json')
+      window.dropboxApi.client.remove('@@vaultFileName.json')
       App.purged = true
       App.router.navigate( 'logout', trigger: true )
     else

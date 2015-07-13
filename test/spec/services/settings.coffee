@@ -46,7 +46,7 @@ describe 'App.Services.Settings', ->
       passwords = null
 
       beforeEach ->
-        dropboxApi.client.remove('vault.json')
+        dropboxApi.client.remove('@@vaultFileName.json')
         App.Passwords.MAX_UPDATE_SPEED = 1
         App.passwords = new App.Passwords
         _.each [ 'pass1', 'pass2', 'pass3', 'pass4' ], ( name ) ->

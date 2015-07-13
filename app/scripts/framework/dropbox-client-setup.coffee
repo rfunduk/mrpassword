@@ -8,9 +8,9 @@ window.dropboxApi =
   ready: ( cb ) -> @deferred.done( cb )
   _actuallySave: _.throttle(
     ->
-      @client.writeFile 'vault.json', JSON.stringify(@data, undefined, 2), ( error, stat ) ->
-        if error
-          alert("Uh oh, a problem saving something here... Try again?")
+      jsonData = JSON.stringify( @data, undefined, 2 )
+      @client.writeFile '@@vaultFileName.json', jsonData, ( error, stat ) ->
+        alert("Uh oh, a problem saving something here... Try again?") if error
         App.dispatcher.trigger 'saved'
     1000
   )
@@ -25,7 +25,7 @@ client.authenticate(
       alert("Sorry! Dropbox authentication failure: #{error}")
       return
     else if client.isAuthenticated()
-      client.readFile 'vault.json', ( error, data ) ->
+      client.readFile '@@vaultFileName.json', ( error, data ) ->
         if error
           data = { passwords: [], tags: [], settings: [] }
           window.dropboxApi.data = data
@@ -36,4 +36,3 @@ client.authenticate(
     else
       window.dropboxApi.deferred.resolve() # show intro page
 )
-

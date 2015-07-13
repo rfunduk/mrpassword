@@ -104,7 +104,8 @@ and that has made this project a bit of a mess temporarily.
 
 If you're just _using_ my
 [hosted Mr. Password](https://tinyurl.com/mrpassword), then there
-is a migration feature. Otherwise you'll need to check out
+is a migration feature (**now disabled/removed, July 13, 2015**).
+Otherwise you'll need to check out
 [this migrator service](app/scripts/services/migrator.coffee) for some
 explanation of how to perform a migration yourself.
 

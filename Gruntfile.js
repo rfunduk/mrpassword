@@ -4,7 +4,7 @@ module.exports = function (grunt) {
   try {
     var DROPBOX_API_KEY = grunt.option('dropboxApiKey') ||
                           grunt.file.read('./.dropboxApiKey');
-    DROPBOX_API_KEY = DROPBOX_API_KEY.replace(/[\n\s]/gi, '')
+    DROPBOX_API_KEY = DROPBOX_API_KEY.replace(/[\n\s]/gi, '');
     console.log("** Configuring with Dropbox Datastore API key: '" + DROPBOX_API_KEY + "'");
   }
   catch( e ) {
@@ -22,7 +22,13 @@ module.exports = function (grunt) {
   require('time-grunt')(grunt);
 
   // Define the configuration for all the tasks
-  grunt.initConfig({
+  grunt.initConfig( {
+
+    env: {
+      development: { NODE_ENV: 'development' },
+      test: { NODE_ENV: 'test' },
+      production: { NODE_ENV: 'production' }
+    },
 
     // Project settings
     yeoman: {
@@ -48,18 +54,7 @@ module.exports = function (grunt) {
       gruntfile: {
         files: ['Gruntfile.js'],
         tasks: ['dev']
-      },
-      // livereload: {
-      //   options: {
-      //     livereload: '<%= connect.options.livereload %>'
-      //   },
-      //   files: [
-      //     '<%= yeoman.app %>/{,*/}*.html',
-      //     '.tmp/styles/{,*/}*.css',
-      //     '.tmp/scripts/{,*/}*.js',
-      //     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-      //   ]
-      // }
+      }
     },
 
     replace: {
@@ -70,6 +65,16 @@ module.exports = function (grunt) {
               match: 'dropboxApiKey',
               replacement: DROPBOX_API_KEY,
               expression: false
+            },
+            {
+              match: 'vaultFileName',
+              replacement: function() {
+                switch( process.env.NODE_ENV ) {
+                  case 'development': return 'vault-dev'
+                  case 'test': return 'vault-test'
+                  case 'production': return 'vault'
+                }
+              }
             }
           ]
         },
@@ -88,17 +93,7 @@ module.exports = function (grunt) {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
-        // livereload: 35729
       },
-      // livereload: {
-      //   options: {
-      //     open: false,
-      //     base: [
-      //       '.tmp',
-      //       '<%= yeoman.app %>'
-      //     ]
-      //   }
-      // },
       dev: {
         options: {
           port: 9000,
@@ -193,26 +188,6 @@ module.exports = function (grunt) {
     },
 
     // Compiles Sass to CSS and generates necessary files if requested
-    // sass: {
-    //   options: {
-    //     loadPath: [
-    //       '<%= yeoman.app %>/styles',
-    //       '<%= yeoman.app %>/bower_components/'
-    //     ],
-    //     precision: 10,
-    //     style: 'compact',
-    //     trace: true
-    //   },
-    //   dist: {
-    //     expand: true,
-    //     cwd: '<%= yeoman.app %>/styles',
-    //     src: 'main.scss',
-    //     ext: '.css',
-    //     dest: '.tmp/styles'
-    //   }
-    // },
-
-    // grunt-sass now that it's working?
     sass: {
       options: {
         includePaths: [
@@ -335,8 +310,28 @@ module.exports = function (grunt) {
         autoWatch: true,
         singleRun: false
       }
+    },
+
+    // HTML5 offline cache manifest
+    manifest: {
+      generate: {
+        options: {
+          basePath: './dist',
+          timestamp: false,
+          hash: true
+        },
+        src: [
+          '*index.html',
+          'scripts/*.js',
+          'styles/*.css',
+          'fonts/*',
+          'images/**/*.{png,gif}',
+          'favicon.ico'
+        ],
+        dest: 'dist/manifest.appcache'
+      }
     }
-  });
+  } );
 
 
   grunt.registerTask('serve', function (target) {
@@ -348,6 +343,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('dev', [
+    'env:development',
     'clean:server',
     'copy:fonts',
     'handlebars',
@@ -358,10 +354,12 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('test', [
+    'env:test',
     'clean:server',
     'copy:fonts',
     'handlebars',
     'coffee',
+    'replace',
     'sass',
     'autoprefixer',
     'connect:test',
@@ -369,6 +367,7 @@ module.exports = function (grunt) {
   ]);
 
   var buildTasks = [
+    'env:production',
     'clean:dist',
     'useminPrepare',
     'handlebars',
@@ -384,7 +383,8 @@ module.exports = function (grunt) {
     'rev:dist',
     'usemin',
     'rev:deploy',
-    'copy:keepIndex'
+    'copy:keepIndex',
+    'manifest'
   ];
 
   grunt.registerTask('build', buildTasks);

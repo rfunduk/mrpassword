@@ -6,6 +6,7 @@
     "name": "Ryan Funduk",
     "email": "ryan.funduk@gmail.com"
   },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/rfunduk/mrpassword.git"
@@ -27,7 +28,9 @@
     "grunt-contrib-imagemin": "~0.3.0",
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-contrib-watch": "~0.5.2",
+    "grunt-env": "^0.4.4",
     "grunt-karma": "^0.10.1",
+    "grunt-manifest": "git://github.com/gunta/grunt-manifest.git#0.4.2",
     "grunt-newer": "~0.5.4",
     "grunt-replace": "^0.6.2",
     "grunt-rev": "~0.1.0",
