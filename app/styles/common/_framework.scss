@@ -26,7 +26,7 @@ $input-border-focus: #CCC;
 // lighten disabled input bg
 $input-bg-disabled: #FEFEFE;
 
-@import 'bootstrap-sass/vendor/assets/stylesheets/bootstrap';
+@import 'bootstrap-sass/assets/stylesheets/bootstrap';
 
 .form-control {
   &, &:focus { @include box-shadow( none !important ); }

@@ -2,6 +2,11 @@
   margin-bottom: 0;
 
   .list-group-item {
+    &:hover {
+      cursor: pointer;
+      background-color: #FEFEFE;
+    }
+
     .list-group-item-heading {
       border: 1px dashed transparent;
       padding: 6px;

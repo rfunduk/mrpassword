@@ -6,9 +6,10 @@
     "sjcl": "~1.0.0",
     "backbone": "~1.1.2",
     "handlebars": "~1.3.0",
-    "bootstrap-sass": "twbs/bootstrap-sass#~3.1.1",
+    "bootstrap-sass": "twbs/bootstrap-sass#~3.3.7",
     "FileSaver": "*",
-    "bootstrap-tagsinput": "rfunduk/bootstrap-tagsinput#master"
+    "bootstrap-tagsinput": "rfunduk/bootstrap-tagsinput#master",
+    "clipboard": "^1.5.12"
   },
   "devDependencies": {}
 }

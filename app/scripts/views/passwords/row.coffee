@@ -2,14 +2,13 @@ App.Views.Passwords ?= {}
 
 class App.Views.Passwords.Row extends App.Views.Stepped
   className: 'list-group-item'
-  tagName: 'a'
+  tagName: 'li'
   steps: 3
   events:
     'click': 'navOrCancel'
     'keyup .master-password': 'checkMaster'
     'keydown .revealed-password': 'watchForCopy'
     'keyup h4[contenteditable]': 'updateName'
-    'click .revealed-password': 'focus'
     'click .action-done': 'clearAndReset'
     'click .action-save': 'updatePassword'
     'click .action-edit-tags': 'editTags'
@@ -29,15 +28,11 @@ class App.Views.Passwords.Row extends App.Views.Stepped
 
   navOrCancel: ( e ) ->
     target = $(e.target)
-    if target.is('input, button, a')
-      e.preventDefault()
-      e.stopPropagation()
-      return
-
-    if @currentStep != 0
-      @reset()
-    else
-      @nextStep() if @mode == 'show'
+    if !target.is('input, button, a')
+      if @currentStep != 0
+        @reset()
+      else
+        @nextStep() if @mode == 'show'
 
   focus: ->
     @$('.revealed-password').trigger('focus').get(0).select()
@@ -91,14 +86,14 @@ class App.Views.Passwords.Row extends App.Views.Stepped
   # here unless the master step worked, and also
   # take this opportunity to clear the master field
   step3: ->
-    field = switch @mode
-      when 'show' then @$('.revealed-password')
-      when 'edit' then @$('.new-password')
-
-    field.attr( type: 'text' )
-
+    @passwordField().attr( type: 'text' )
     allowed = App.master || @$('.master-password').parents('.form-group').hasClass('has-success')
     @prevStep() unless allowed
+
+  passwordField: ->
+    switch @mode
+      when 'show' then @$('.revealed-password')
+      when 'edit' then @$('.new-password')
 
   # when someone ctrl/cmd+c's in the revealed password
   # box, switch it to a password field and transition back
@@ -130,12 +125,21 @@ class App.Views.Passwords.Row extends App.Views.Stepped
 
   # reveal this model's password given a correct  master password
   revealPasswordField: ( master, delay=1000 ) ->
-    field = switch @mode
-      when 'show' then @$('.revealed-password')
-      when 'edit' then @$('.new-password')
+    field = @passwordField()
 
     password = @model.password( master )
     field.val( password )
+
+    @clipboard?.destroy()
+
+    @clipboard = new Clipboard(
+      @$('.action-copy').get(0),
+      text: => password
+    )
+    @clipboard.on( 'success', =>
+      @passwordField().attr( type: 'password' )
+      setTimeout( @clearAndReset, 1000 )
+    )
 
     setTimeout(
       =>
@@ -194,4 +198,6 @@ class App.Views.Passwords.Row extends App.Views.Stepped
     # lookup tags so we can set colors, etc
     json.tags = App.tags.toJSON( @model.get('tags') )
     @$el.html App.Templates.passwords[@mode]( json )
+    @clipboard?.destroy()
+    @clipboard = null
     @
