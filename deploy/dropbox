@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-if [ -n "$1" ]; then
-  DROPBOX_NAME=" ($1)"
-fi
-echo "Deploying ./dist to ~/Dropbox$DROPBOX_NAME/Public/MrPassword"
-rsync -r --quiet ./dist/ "$HOME/Dropbox$DROPBOX_NAME/Public/MrPassword"
-echo "DONE"

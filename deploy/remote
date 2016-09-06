@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+echo "Deploying ./dist to $1"
+rsync -r --quiet ./dist/ "$1"
+echo "DONE"
