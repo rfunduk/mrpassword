@@ -132,18 +132,18 @@ class App.Views.Passwords.Row extends App.Views.Stepped
 
     @clipboard?.destroy()
 
-    @clipboard = new Clipboard(
-      @$('.action-copy').get(0),
-      text: => password
-    )
-    @clipboard.on( 'success', =>
-      @passwordField().attr( type: 'password' )
-      setTimeout( @clearAndReset, 1000 )
-    )
-
     setTimeout(
       =>
         @trigger('stepped.next')
+        if @mode == 'show'
+          @clipboard = new Clipboard(
+            @$('.action-copy').get(0),
+            text: => password
+          )
+          @clipboard.on( 'success', =>
+            @passwordField().attr( type: 'password' )
+            setTimeout( @clearAndReset, 1000 )
+          )
         field.trigger('focus').get(0).select()
       delay
     )
