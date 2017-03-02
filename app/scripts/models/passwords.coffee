@@ -22,8 +22,8 @@ class App.Passwords extends Backbone.Collection
   @MAX_UPDATE_SPEED = 100
 
   comparator: ( p1, p2 ) ->
-    n1 = p1.get('name').toLowerCase()
-    n2 = p2.get('name').toLowerCase()
+    n1 = p1.get('name')?.toLowerCase() || "ZZZZZZZZZZZ"
+    n2 = p2.get('name')?.toLowerCase() || "ZZZZZZZZZZZ"
     return 0 if n1 == n2
     if n2 >= n1 then 1 else -1
 

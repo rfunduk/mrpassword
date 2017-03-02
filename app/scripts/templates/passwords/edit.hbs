@@ -13,6 +13,9 @@
               <button class='delete btn btn-danger action-delete pull-left'>
                 <span class='glyphicon glyphicon-trash'></span>
               </button>
+              <button class='btn btn-default action-toggle-multiline'>
+                <span class='glyphicon glyphicon-{{#if isMultiline}}align-justify{{else}}minus{{/if}}'></span>
+              </button>
               <button class='btn btn-default action-edit-tags' data-container='body' data-toggle='popover' data-width='300' data-placement='bottom'>
                 <span class='glyphicon glyphicon-tags'></span>
               </button>
@@ -29,7 +32,11 @@
 
           <div class='step step3'>
             <div class="input-group">
-              <input type='text' class='form-control new-password password-field' />
+              {{#if isMultiline}}
+                <textarea class='form-control new-password password-field'></textarea>
+              {{else}}
+                <input type='text' class='form-control new-password password-field' />
+              {{/if}}
               <span class="input-group-btn">
                 <button class='btn btn-default action-generate' data-toggle='tooltip' data-placement='bottom' title='Generate a password'>
                   <span class='glyphicon glyphicon-repeat'></span>

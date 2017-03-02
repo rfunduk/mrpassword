@@ -12,6 +12,7 @@ class App.Views.Passwords.Row extends App.Views.Stepped
     'click .action-done': 'clearAndReset'
     'click .action-save': 'updatePassword'
     'click .action-edit-tags': 'editTags'
+    'click .action-toggle-multiline': 'toggleMultiline'
     'click .action-delete': 'delete'
     'click .action-edit': 'edit'
     'click .action-show': 'show'
@@ -28,7 +29,7 @@ class App.Views.Passwords.Row extends App.Views.Stepped
 
   navOrCancel: ( e ) ->
     target = $(e.target)
-    if !target.is('input, button, a')
+    if !target.is('input, textarea, button, a')
       if @currentStep != 0
         @reset()
       else
@@ -165,6 +166,12 @@ class App.Views.Passwords.Row extends App.Views.Stepped
 
     field.parents('.form-group')[f]('has-success')
     field.siblings('.glyphicon')[f]('glyphicon-ok')
+
+  toggleMultiline: ->
+    isMultiline = !@model.get('isMultiline')
+    @model.set isMultiline: isMultiline
+    @model.save() unless @model.isNew()
+    @render()
 
   editTags: ->
     if @_tagsPopover
