@@ -1,10 +1,10 @@
 {
   "name": "mrpassword",
   "version": "0.0.1",
-  "description": "A single-page CoffeeScript app using the Dropbox Datastore API to store encrypted passwords.",
+  "description": "A single-page CoffeeScript app using the Dropbox API to store encrypted passwords.",
   "author": {
     "name": "Ryan Funduk",
-    "email": "ryan.funduk@gmail.com"
+    "email": "ryan@funduk.ca"
   },
   "license": "MIT",
   "repository": {
@@ -50,7 +50,6 @@
   "scripts": {
     "dev": "grunt serve",
     "build": "grunt build",
-    "test": "grunt test",
-    "deploy": "./deploy/dropbox"
+    "test": "grunt test"
   }
 }

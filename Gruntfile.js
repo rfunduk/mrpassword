@@ -5,11 +5,11 @@ module.exports = function (grunt) {
     var DROPBOX_API_KEY = grunt.option('dropboxApiKey') ||
                           grunt.file.read('./.dropboxApiKey');
     DROPBOX_API_KEY = DROPBOX_API_KEY.replace(/[\n\s]/gi, '');
-    console.log("** Configuring with Dropbox Datastore API key: '" + DROPBOX_API_KEY + "'");
+    console.log("** Configuring with Dropbox API key: '" + DROPBOX_API_KEY + "'");
   }
   catch( e ) {
     console.log(
-      "** A Dropbox Datastore API key is required to run Mr. Password.\n" +
+      "** A Dropbox API key is required to run Mr. Password.\n" +
       "** Please provide a key via --dropboxApiKey='KEY' or in a file named .dropboxApiKey\n"
     );
     process.exit(1);

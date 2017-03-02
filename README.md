@@ -82,20 +82,3 @@ This dumps the final packaged up app into `./dist`. There are
 2 deploy scripts in the `deploy` directory.
 
 - `deploy/remote` copies the files via rsync to a remote server. Eg. `deploy/remote yoursite.com:/var/www/yoursite/mrpassword`
-
-
-## Migration from Dropbox Datastore API
-
-Early 2015 Dropbox decided to
-[deprecate the Datastore API](https://blogs.dropbox.com/developers/2015/04/deprecating-the-sync-and-datastore-apis/)
-and that has made this project a bit of a mess temporarily.
-
-If you're running this you'll need to check out
-[this migrator service](app/scripts/services/migrator.coffee) for some
-explanation of how to perform a migration yourself.
-
-Email me if you have trouble :/
-
-## Migration from Dropbox Hosting
-
-If you were using this app via http://tinyurl.com/mrpassword, unfortunately Dropbox is no longer allowing hosting of HTML starting in October 2016. So if you want to use my hosted app, start using https://ryanfunduk.com/mrpassword instead.
