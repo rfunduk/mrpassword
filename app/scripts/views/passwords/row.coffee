@@ -35,8 +35,9 @@ class App.Views.Passwords.Row extends App.Views.Stepped
       else
         @nextStep() if @mode == 'show'
 
-  focus: ->
-    @$('.revealed-password').trigger('focus').get(0).select()
+  # focus: ->
+  #   unless @model.get('isMultiline')
+  #     @$('.revealed-password').trigger('focus').get(0).select()
 
   remove: ->
     @_tagsPopover?.remove()
@@ -145,7 +146,8 @@ class App.Views.Passwords.Row extends App.Views.Stepped
             @passwordField().attr( type: 'password' )
             setTimeout( @clearAndReset, 1000 )
           )
-        field.trigger('focus').get(0).select()
+        unless @model.get('isMultiline')
+          field.trigger('focus').get(0).select()
       delay
     )
 
