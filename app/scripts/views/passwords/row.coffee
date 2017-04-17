@@ -1,5 +1,7 @@
 App.Views.Passwords ?= {}
 
+C = 67
+
 class App.Views.Passwords.Row extends App.Views.Stepped
   className: 'list-group-item'
   tagName: 'li'
@@ -101,7 +103,7 @@ class App.Views.Passwords.Row extends App.Views.Stepped
   # box, switch it to a password field and transition back
   # to step1 after 1 second
   watchForCopy: ( e ) ->
-    if e.which == 67 && (e.ctrlKey || e.metaKey)
+    if !@model.get('isMultiline') && e.which == C && (e.ctrlKey || e.metaKey)
       setTimeout(
         => @$('.revealed-password').attr( type: 'password' )
         150

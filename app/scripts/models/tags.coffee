@@ -3,14 +3,13 @@ class App.Tag extends Backbone.Model
 
 class App.Tags extends Backbone.Collection
   @COLORS_BY_POSITION = [
-    '#555555' # gray
-    '#59378b' # purple
-    '#5cb85c' # green
-    '#5bc0de' # light blue
-    '#d9534f' # red
-    '#f0ad4e' # orange
     '#113c6c' # blue
-    '#000000' # black
+    '#d9534f' # red
+    '#5cb85c' # green
+    '#59378b' # purple
+    '#f0ad4e' # orange
+    '#5bc0de' # light blue
+    '#555555' # black
   ]
 
   model: App.Tag

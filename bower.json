@@ -9,7 +9,8 @@
     "bootstrap-sass": "twbs/bootstrap-sass#~3.3.7",
     "FileSaver": "*",
     "bootstrap-tagsinput": "rfunduk/bootstrap-tagsinput#master",
-    "clipboard": "^1.5.12"
+    "clipboard": "^1.5.12",
+    "sweetalert2": "^6.6.0"
   },
   "devDependencies": {}
 }
