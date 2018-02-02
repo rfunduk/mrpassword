@@ -1,12 +1,10 @@
 App.Views.Passwords ?= {}
 
 class App.Views.Passwords.List extends Backbone.View
-  className: 'list-group'
-  tagName: 'div'
-
   initialize: ->
     @listenTo App.passwords, 'add', @renderItem
     @listenTo App.filteredTags, 'add remove reset filter', @filter
+    @listenTo App.dispatcher, 'changeSearchTerm', @filter
     @subviews = {}
 
   remove: ->
@@ -14,39 +12,53 @@ class App.Views.Passwords.List extends Backbone.View
     @subviews = {}
     super()
 
+  satisfiesSearchTerm: ( m ) ->
+    return true if App.searchTerm.length == 0
+    !!m.get('name').match( new RegExp( App.searchTerm, 'i' ) )
+
   filter: ->
+    if _.isEmpty( @subviews )
+      @render()
+      return
+    else
+      @$('.empty-placeholder').remove()
+
+    oneShown = false
     if App.filteredTags.isEmpty()
       # if we have NO filtered tags, show everything
-      if _.isEmpty( @subviews )
-        @render()
-      else
-        _.each @subviews, ( v ) -> v.$el.show()
-        @$('.empty-placeholder').remove()
+      _.each @subviews, ( v, cid ) =>
+        if @satisfiesSearchTerm(App.passwords.get(cid))
+          oneShown = true
+          v.$el.show()
+        else
+          v.$el.hide()
     else
       # we need to hide/show views depending on
       # the model having the chosen tags
       @$('.empty-placeholder').remove()
       filteredTags = App.filteredTags.pluck('id')
-      oneShown = false
-      _.each @subviews, ( view, modelCid ) ->
+      _.each @subviews, ( view, modelCid ) =>
         password = App.passwords.get(modelCid)
         tags = password.get('tags')
 
         hasAllFilteredTags = _.every filteredTags, ( tagId ) ->
           _.include( tags, tagId )
+        satisfiesSearchTerm = @satisfiesSearchTerm( password )
 
-        if hasAllFilteredTags
+        if hasAllFilteredTags && satisfiesSearchTerm
           view.$el.show()
           oneShown = true
         else
           view.$el.hide()
 
-      unless oneShown
-        @$el.append( App.Templates.passwords.empty_placeholder( filtered: true ) )
+    unless oneShown
+      @$el.append( App.Templates.passwords.empty_placeholder( filtered: true ) )
 
   render: ->
     if App.passwords.isEmpty()
       @$el.html( App.Templates.passwords.empty_placeholder() )
+    else
+      @$el.html( "<div class='list-group'></div>" )
     App.passwords.each @renderItem, @
     @
 
@@ -54,5 +66,5 @@ class App.Views.Passwords.List extends Backbone.View
     @$('.empty-placeholder').remove()
     v = new App.Views.Passwords.Row( model: item )
     v.show()
-    @$el.prepend v.el
+    @$('.list-group').prepend v.el
     @subviews[item.cid] = v

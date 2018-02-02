@@ -1,7 +1,6 @@
 App.Views.Passwords ?= {}
 
 class App.Views.Passwords.Create extends App.Views.Stepped
-  className: 'list-group'
   steps: 3
   events:
     'keyup .master-password': 'checkMaster'

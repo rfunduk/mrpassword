@@ -12,6 +12,7 @@ class App.Views.Passwords.Row extends App.Views.Stepped
     'keydown .revealed-password': 'watchForCopy'
     'keyup h4[contenteditable]': 'updateName'
     'click .action-done': 'clearAndReset'
+    'click .action-done-editing': 'done'
     'click .action-save': 'updatePassword'
     'click .action-edit-tags': 'editTags'
     'click .action-toggle-multiline': 'toggleMultiline'
@@ -62,7 +63,7 @@ class App.Views.Passwords.Row extends App.Views.Stepped
 
   # update the name of the password
   updateName: ->
-    @model.save name: $.trim(@$('h4').text())
+    @model.set name: $.trim(@$('h4').text())
 
   # encrypt and set new data
   updatePassword: ->
@@ -70,7 +71,6 @@ class App.Views.Passwords.Row extends App.Views.Stepped
       App.master || @$('.master-password').val()
       @$('.new-password').val()
     )
-    @model.save()
     @reset()
 
   step1: ->
@@ -174,7 +174,6 @@ class App.Views.Passwords.Row extends App.Views.Stepped
   toggleMultiline: ->
     isMultiline = !@model.get('isMultiline')
     @model.set isMultiline: isMultiline
-    @model.save() unless @model.isNew()
     @render()
 
   editTags: ->
@@ -186,6 +185,13 @@ class App.Views.Passwords.Row extends App.Views.Stepped
         el: @$('.action-edit-tags')
         model: @model
       )
+
+  done: ( e ) ->
+    e.preventDefault()
+    e.stopPropagation()
+    @show()
+    console.log "SAVING", @model.toJSON()
+    @model.save()
 
   edit: ( e ) ->
     if e

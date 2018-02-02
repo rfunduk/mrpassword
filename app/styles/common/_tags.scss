@@ -51,23 +51,47 @@
   -khtml-user-select: none; /* webkit (konqueror) browsers */
   -ms-user-select: none; /* IE10+ */
 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
   ul {
     @include clearfix;
     list-style: none outside;
     margin: 0;
     padding: 0;
     text-align: center;
-    margin-bottom: 22px;
     &:empty { margin-bottom: 0; }
 
     li {
       display: inline-block;
       margin: 0 4px;
+      &:first-child { margin-left: 0; }
+      &:last-child { margin-right: 0; }
       .label {
-        font-size: 16px;
+        font-size: 18px;
         background-color: #F6F6F6;
         cursor: pointer;
       }
+    }
+  }
+
+  input {
+    font-size: 18px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #EEE;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    display: block;
+    ul {
+      margin-bottom: 20px;
+    }
+    input {
+      display: block;
+      margin: 0 auto;
     }
   }
 }

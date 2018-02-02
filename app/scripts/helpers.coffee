@@ -6,7 +6,7 @@ Handlebars.registerHelper 'ifSetting', ( key, options ) ->
   if truthy then options.fn(@) else options.inverse(@)
 
 Handlebars.registerHelper 'ifLoggedIn', ( options ) ->
-  truthy = App.settings.api.client.isAuthenticated()
+  truthy = App.settings.api.loggedIn
   if truthy then options.fn(@) else options.inverse(@)
 
 Handlebars.registerHelper 'ifHasMasterPassword', ( options ) ->

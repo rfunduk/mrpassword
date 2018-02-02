@@ -1,5 +1,7 @@
-{{#each tags}}
-  <li data-tag-id='{{id}}' class='tag'>
-    <label class='label label-default' style='{{#if active}}color: white; background-color: {{color}};{{else}}color: {{color}};{{/if}}'>{{name}}</label>
-  </li>
-{{/each}}
+<ul>
+  {{#each tags}}
+    <li data-tag-id='{{id}}' class='tag'>
+      <label class='label label-default' style='{{#if active}}color: white; background-color: {{color}};{{else}}color: {{color}};{{/if}}'>{{name}}</label>
+    </li>
+  {{/each}}
+</ul>

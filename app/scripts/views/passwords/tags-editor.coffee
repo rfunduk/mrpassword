@@ -18,9 +18,7 @@ class App.Views.Passwords.TagsEditor extends Backbone.View
     clicked.toggleClass('active')
 
     tagIds = $("#{@popupSelector()} li.active").map ( _, el ) -> $(el).data('id')
-
     @model.set tags: tagIds.toArray()
-    @model.save() unless @model.isNew()
 
   content: ->
     tagIds = @model.get('tags') || []

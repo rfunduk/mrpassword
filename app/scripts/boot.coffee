@@ -14,7 +14,7 @@ class Router extends Backbone.Router
     _.each @_routes, ( fnName, routeKey ) =>
       fn = @[fnName]
       @routes[routeKey] = ( args... ) =>
-        if fnName != 'login' && !window.dropboxApi.client.isAuthenticated()
+        if fnName != 'login' && !window.dropboxApi.loggedIn
           @navigate( 'login', trigger: true )
         else
           @_currentRoute = fnName
@@ -43,7 +43,7 @@ class Router extends Backbone.Router
     @view = new App.Views.Login
     $('.container').html @view.render().el
   logout: ->
-    window.dropboxApi.client.signOut()
+    window.dropboxApi.signOut()
     @view = new App.Views.LoggedOut
     $('.container').html @view.render().el
 
@@ -57,6 +57,7 @@ class Router extends Backbone.Router
     else
       @view = new App.Views.Main
       $('.container').html @view.render().el
+      $('#search').focus()
 
 
 $(document).ready ->
@@ -64,9 +65,14 @@ $(document).ready ->
     App.passwords = new App.Passwords
     App.tags = new App.Tags
 
-    if window.dropboxApi.client.isAuthenticated()
+    if window.dropboxApi.loggedIn
       App.passwords.fetch()
       App.tags.fetch()
+
+    App.searchTerm = window.localStorage.getItem( 'searchTerm' ) || ''
+    App.dispatcher.on 'changeSearchTerm', ( term ) ->
+      App.searchTerm = term
+      window.localStorage.setItem( 'searchTerm', term )
 
     filtered = (window.localStorage.getItem( 'filteredTags' ) || "").split('|||')
     App.filteredTags = new App.Tags(

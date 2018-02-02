@@ -318,7 +318,11 @@ module.exports = function (grunt) {
         options: {
           basePath: './dist',
           timestamp: false,
-          hash: true
+          hash: true,
+          timestamp: true,
+          cache: [
+            'https://unpkg.com/dropbox@2.5.13/dist/Dropbox-sdk.min.js'
+          ]
         },
         src: [
           '*index.html',
