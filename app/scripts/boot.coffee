@@ -29,6 +29,9 @@ class Router extends Backbone.Router
       loading = @header.loading
       @header.remove()
       @header = null
+    if @footer
+      @footer.remove()
+      @footer = null
 
     # cleanup old view
     if @view
@@ -38,6 +41,7 @@ class Router extends Backbone.Router
     cb.apply( @, args ) if cb
 
     @header = new App.Views.Header( el: $('header'), loading: !!loading )
+    @footer = new App.Views.Footer( el: $('footer') )
 
   login: ->
     @view = new App.Views.Login
@@ -57,8 +61,6 @@ class Router extends Backbone.Router
     else
       @view = new App.Views.Main
       $('.container').html @view.render().el
-      $('#search').focus()
-
 
 $(document).ready ->
   window.dropboxApi.ready ->
@@ -68,6 +70,22 @@ $(document).ready ->
     if window.dropboxApi.loggedIn
       App.passwords.fetch()
       App.tags.fetch()
+
+    saving = false
+    App.dispatcher.on 'saving', -> saving = true
+    App.dispatcher.on 'saved', -> saving = false
+    App.dispatcher.on 'reloadData', ->
+      return if saving
+      App.dispatcher.trigger 'saving'
+      window.dropboxApi.getVault ( error, data ) ->
+        if !error
+          window.dropboxApi.data = data
+          App.passwords.fetch()
+          App.tags.fetch()
+        App.dispatcher.trigger 'saved'
+
+    document.addEventListener 'visibilitychange', ->
+      App.dispatcher.trigger 'reloadData'
 
     App.searchTerm = window.localStorage.getItem( 'searchTerm' ) || ''
     App.dispatcher.on 'changeSearchTerm', ( term ) ->
@@ -86,3 +104,6 @@ $(document).ready ->
     $('.container').removeClass('loading')
 
     App.filteredTags.trigger('filter')
+
+    $('#search').focus()
+    canAutoUpdate = true

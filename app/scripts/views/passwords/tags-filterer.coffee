@@ -4,10 +4,20 @@ class App.Views.Passwords.TagsFilterer extends Backbone.View
   events:
     'click li': 'updateFilters'
     'keyup #search': 'updateSearch'
+    'click .action-clear-search': 'clearSearch'
+
+  initialize: ->
+    @listenTo App.tags, 'reset', @render
+
+  clearSearch: ( e ) ->
+    e.preventDefault()
+    el = @$('#search')
+    el.val( '' )
+    @updateSearch( e )
+    el.focus()
 
   updateSearch: ( e ) ->
-    searchEl = @$('#search')
-    App.dispatcher.trigger 'changeSearchTerm', searchEl.val()
+    App.dispatcher.trigger 'changeSearchTerm', @$('#search').val()
 
   updateFilters: ( e ) ->
     tagEl = $(e.target).parents('li.tag')

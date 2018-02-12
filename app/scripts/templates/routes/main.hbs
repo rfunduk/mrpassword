@@ -4,7 +4,12 @@
   <div class='row'>
     <div class='col-xs-12'>
       <div id='tags-filterer'>
-        <input type='text' id='search' placeholder='search...' autocomplete='off' />
+        <div class='search-wrapper'>
+          <button class='btn btn-link action-clear-search'>
+            <span class='glyphicon glyphicon-remove'></span>
+          </button>
+          <input type='text' id='search' placeholder='search...' autofocus autocomplete='off' />
+        </div>
       </div>
       <div id='create-password'></div>
       <div id='passwords'></div>

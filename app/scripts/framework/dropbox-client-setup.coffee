@@ -55,6 +55,7 @@ window.dropboxApi =
   data: null
   deferred: $.Deferred()
   nuke: deleteVault
+  getVault: getVault
   authUrl: ->
     redirect = applicationHost
     client.getAuthenticationUrl( redirect )

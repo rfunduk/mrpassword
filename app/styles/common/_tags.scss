@@ -77,11 +77,19 @@
     }
   }
 
-  input {
-    font-size: 18px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    border: 1px solid #EEE;
+  .search-wrapper {
+    .action-clear-search {
+      color: #BBB;
+      margin-right: 0;
+      border: 0;
+      padding-right: 6px;
+    }
+    input {
+      font-size: 18px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid #EEE;
+    }
   }
 
   @media (max-width: $screen-xs-max) {
@@ -89,9 +97,8 @@
     ul {
       margin-bottom: 20px;
     }
-    input {
-      display: block;
-      margin: 0 auto;
+    .search-wrapper {
+      text-align: center;
     }
   }
 }
