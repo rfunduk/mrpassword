@@ -2,11 +2,11 @@ App.Views.Passwords ?= {}
 
 class App.Views.Passwords.List extends Backbone.View
   initialize: ->
+    @subviews = {}
     @listenTo App.passwords, 'reset', @render
     @listenTo App.passwords, 'add', @renderItem
     @listenTo App.filteredTags, 'add remove reset filter', @filter
     @listenTo App.dispatcher, 'changeSearchTerm', @filter
-    @subviews = {}
 
   remove: ->
     _.values @subviews, ( v ) -> v.remove?()
@@ -56,6 +56,7 @@ class App.Views.Passwords.List extends Backbone.View
       @$el.append( App.Templates.passwords.empty_placeholder( filtered: true ) )
 
   render: ->
+    @subviews = {}
     html = if App.passwords.isEmpty()
       App.Templates.passwords.empty_placeholder()
     else

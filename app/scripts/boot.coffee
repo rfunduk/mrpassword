@@ -82,6 +82,7 @@ $(document).ready ->
           window.dropboxApi.data = data
           App.passwords.fetch()
           App.tags.fetch()
+          App.filteredTags.trigger('filter')
         App.dispatcher.trigger 'saved'
 
     document.addEventListener 'visibilitychange', ->
