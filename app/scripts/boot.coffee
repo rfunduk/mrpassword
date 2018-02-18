@@ -67,9 +67,17 @@ $(document).ready ->
     App.passwords = new App.Passwords
     App.tags = new App.Tags
 
+    filtered = (window.localStorage.getItem( 'filteredTags' ) || "").split('|||')
+    App.filteredTags = new App.Tags()
+    App.filteredTags.on 'add remove reset', ->
+      window.localStorage.setItem( 'filteredTags', App.filteredTags.pluck('id').join('|||') )
+
     if window.dropboxApi.loggedIn
       App.passwords.fetch()
       App.tags.fetch()
+      App.filteredTags.reset(
+        App.tags.filter ( tag ) -> _.include( filtered, tag.get('id') )
+      )
 
     saving = false
     App.dispatcher.on 'saving', -> saving = true
@@ -82,6 +90,10 @@ $(document).ready ->
           window.dropboxApi.data = data
           App.passwords.fetch()
           App.tags.fetch()
+          filtered = (window.localStorage.getItem( 'filteredTags' ) || "").split('|||')
+          App.filteredTags.reset(
+            App.tags.filter ( tag ) -> _.include( filtered, tag.get('id') )
+          )
           App.filteredTags.trigger('filter')
         App.dispatcher.trigger 'saved'
 
@@ -92,13 +104,6 @@ $(document).ready ->
     App.dispatcher.on 'changeSearchTerm', ( term ) ->
       App.searchTerm = term
       window.localStorage.setItem( 'searchTerm', term )
-
-    filtered = (window.localStorage.getItem( 'filteredTags' ) || "").split('|||')
-    App.filteredTags = new App.Tags(
-      App.tags.filter ( tag ) -> _.include( filtered, tag.get('id') )
-    )
-    App.filteredTags.on 'add remove reset', ->
-      window.localStorage.setItem( 'filteredTags', App.filteredTags.pluck('id').join('|||') )
 
     App.router = new Router()
     Backbone.history.start()
