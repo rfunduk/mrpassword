@@ -8,6 +8,7 @@ class App.Views.Passwords.TagsFilterer extends Backbone.View
 
   initialize: ->
     @listenTo App.tags, 'reset', @render
+    @listenTo App.filteredTags, 'reset', @render
 
   clearSearch: ( e ) ->
     e.preventDefault()
